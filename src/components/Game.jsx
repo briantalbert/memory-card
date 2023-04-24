@@ -2,11 +2,17 @@ import React, { useEffect, useState } from "react"
 import Card from "./Card"
 
 export default function Game(props) {
-
-    const [animals, setAnimals] = useState(['DOG', 'CAT', 'TURTLE', 'HORSE', 'SASQUATCH', 'BIRD', 'DUCK', 'SLOTH', 'GORILLA', 'BURGER']);
+    
+    const [animals, setAnimals] = useState(['bird', 'dog', 'duck', 'elephant', 'kangaroo', 'mouse', 'pig', 'snail', 'horse', 'turtle'].sort(() => Math.random() - 0.5));
     const [clicked, setClicked] = useState([]);
+    const [win, setWin] = useState(false);
+    
     const score = props.score;
     const setScore = props.setScore;
+
+    if (props.score == 10) {
+        props.setWin(true)
+    }
 
     let animalElements = animals.map(beast => 
         {return (<Card text={beast} 
@@ -16,6 +22,8 @@ export default function Game(props) {
                        setClicked={setClicked}
                        maxScore={props.maxScore}
                        setMaxScore={props.setMaxScore}
+                       win={win}
+                       setWin={setWin}
                 />)}
     );
 
@@ -29,7 +37,7 @@ export default function Game(props) {
 
     return (
         <div className="game">
-            <div className="game-board">{animalElements}</div>
+            {win ? <div className="win">YOU WIN!</div> : <div className="game-board">{animalElements}</div>}
         </div>
     )
 }
