@@ -4,10 +4,19 @@ import Card from "./Card"
 export default function Game(props) {
 
     const [animals, setAnimals] = useState(['DOG', 'CAT', 'TURTLE', 'HORSE', 'SASQUATCH', 'BIRD', 'DUCK', 'SLOTH', 'GORILLA', 'BURGER']);
-    const [count, setCount] = useState(0);
+    const [clicked, setClicked] = useState([]);
+    const score = props.score;
+    const setScore = props.setScore;
 
     let animalElements = animals.map(beast => 
-        {return (<Card text={beast} shuffle={shuffleList} count={count} setCount={setCount} />)}
+        {return (<Card text={beast} 
+                       score={score} 
+                       setScore={setScore} 
+                       clicked={clicked} 
+                       setClicked={setClicked}
+                       maxScore={props.maxScore}
+                       setMaxScore={props.setMaxScore}
+                />)}
     );
 
     function shuffleList() {
@@ -16,7 +25,7 @@ export default function Game(props) {
 
     useEffect(() => {
         shuffleList();
-    }, [count])
+    }, [score])
 
     return (
         <div className="game">

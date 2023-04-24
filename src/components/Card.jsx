@@ -1,9 +1,21 @@
 import React, { useState } from "react"
 
 export default function Card(props) {
-    
+
     function handleClick() {
-        props.setCount(props.count + 1);
+        if (props.clicked.indexOf(props.text) == -1) {
+            props.setClicked(prevList => 
+                [...prevList,
+                props.text]
+            );
+            props.setScore(props.score + 1);
+        } else {
+            props.setClicked([]);
+            if (props.score > props.maxScore) {
+                props.setMaxScore(props.score);
+            }
+            props.setScore(0);
+        }
     }
 
     return (

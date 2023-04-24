@@ -11,7 +11,7 @@ function App() {
   return (
     <div>
       <Header score={score} maxScore={maxScore} />
-      <Game setScore={setScore} setMaxScore={setMaxScore} />
+      <Game score={score} maxScore={maxScore} setScore={setScore} setMaxScore={setMaxScore} />
     </div>
   )
 }
